@@ -3,3 +3,6 @@ poetry.lock
 __pycache__/
 data/
 notebook/
+dist/
+Notes.md
+.ipynb_checkpoints/
