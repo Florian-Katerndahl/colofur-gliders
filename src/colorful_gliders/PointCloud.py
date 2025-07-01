@@ -1,3 +1,4 @@
+from typing import Optional
 from pathlib import Path
 import logging
 import open3d
@@ -113,7 +114,7 @@ class PointCloud:
         
         open3d.io.write_triangle_mesh(model_path, self.mesh, compressed=True)
 
-    def rotate_upwards(self, k: int = 10):
+    def rotate_upwards(self, k: int = 10, source: Optional[np.array] = None):
         """
         Rotate the point cloud upwards.
 
@@ -121,14 +122,22 @@ class PointCloud:
 
         :param k: Number of nearest neighbors for normal orientation, defaults to 10
         :type k: int, optional
-        """        
-        if not self.pc.has_normals():
-            self.pc.estimate_normals()
-            self.pc.orient_normals_consistent_tangent_plane(k)
-            self.pc.normalize_normals()
+        :param source: Instead of estimating normals, give a 'source' vector which should
+        rotated
+        :type source: np.array, optional
+        """
+        if source is not None:
+            R: np.array = find_rotation(source, np.array([0, 0, 1]))
         
-        mean_normal: np.array = np.array(self.pc.normals).mean(axis=0)
-        
-        R: np.array = find_rotation(mean_normal, np.array([0, 0, 1]))
-        
-        self.pc = self.pc.rotate(R)
+            self.pc = self.pc.rotate(R)
+        else:
+            if not self.pc.has_normals():
+                self.pc.estimate_normals()
+                self.pc.orient_normals_consistent_tangent_plane(k)
+                self.pc.normalize_normals()
+
+            mean_normal: np.array = np.array(self.pc.normals).mean(axis=0)
+
+            R: np.array = find_rotation(mean_normal, np.array([0, 0, 1]))
+
+            self.pc = self.pc.rotate(R)
