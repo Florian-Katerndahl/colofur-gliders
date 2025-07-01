@@ -10,7 +10,7 @@ Either clone this repository and use [poetry](https://python-poetry.org/) or dow
 
 ### Extras
 
-If you wish to install jupyterlab and matplotlib alongside, chosse the "interactive" extra. Pip uses a `[]` syntax, i.e. `pip install colorful_gliders-0.1.0-py3-none-any.whl[interactive]` while poetry requires the `-E` flag to be set when installing.
+If you wish to install jupyterlab and matplotlib alongside, chosse the "interactive" extra. Pip uses a `[]` syntax, i.e. `pip install 'colorful_gliders-0.1.0-py3-none-any.whl[interactive]'` while poetry requires the `-E` flag to be set when installing.
 
 ## License
 
