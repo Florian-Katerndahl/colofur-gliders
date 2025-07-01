@@ -20,7 +20,7 @@ def find_rotation(a: np.array, b: np.array) -> np.array:
     :return: Rotation matrix [3x3]
     :rtype: np.array
     """
-    if (a == -b):
+    if np.array_equal(a, -b):
         raise ValueError("Cannot rotate vectors when a == -b")
 
     a_n = a / np.linalg.norm(a)
