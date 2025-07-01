@@ -4,12 +4,13 @@
 
 ## Getting Started
 
-- installation
-- prerequisites
+Either clone this repository and use [poetry](https://python-poetry.org/) or download the Wheel and install using pip. Please note that Open3D does not support Python 3.13 at the time of writing.
+
+### Extras
+
+If you wish to install jupyterlab and matplotlib alongside, chosse the "interactive" extra. Pip uses a `[]` syntax, i.e. `pip install colorful_gliders-0.1.0-py3-none-any.whl[interactive]` while poetry requires the `-E` flag to be set when installing.
 
 ## Usage
-
-## Data
 
 ## License
 
